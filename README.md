@@ -1,6 +1,6 @@
-# opencollar-firmware by Kevin Lhoste
+# Movuino Firmware
 
-Firmware for the open collar
+Arduino Firmware for Movuino
 
  ## Quick Start
 
