@@ -7,6 +7,7 @@ sensor_3_axes MvSens::acc;
 sensor_3_axes MvSens::gyro;
 sensor_3_axes MvSens::mag;
 sensor_single MvSens::alt;
+sensor_single MvSens::batt;
 
 void MvSens::altimeter_setup(void)
 {
@@ -205,6 +206,9 @@ int MvSens::read(void)
     // Read from the altimeter
     MvSens::alt.p = MvSens::ms5611.readPressure();
     MvSens::alt.ts = millis();
+	 // Read from the altimeter
+    MvSens::batt.p = analogRead(A5);
+    MvSens::batt.ts = millis();
     // FIXME: this was done to avoid I2C blocage
 
 #ifdef MV_SENS_DMP_EN
@@ -244,6 +248,11 @@ struct sensor_single MvSens::get_raw_alt(void)
 {
     return MvSens::alt;
 }
+struct sensor_single MvSens::get_batt_v(void)
+{
+    return MvSens::batt;
+}
+
 
 #ifdef MV_SENS_DMP_EN
 struct sensor_quaternion MvSens::get_quat(void)

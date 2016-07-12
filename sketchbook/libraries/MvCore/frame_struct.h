@@ -60,14 +60,17 @@ enum cfg_id {
     CFG_ID_LIVE_MAG_RAW_EN = 'm',
     /** enable altimeter (pressure) at live mode */
     CFG_ID_LIVE_ALT_RAW_EN = 'p',
-    /** enable quaternion at live mode */
+    /** enable battery measurment */
+	CFG_ID_LIVE_BATT_V_EN = 'b',
+	/** enable quaternion at live mode */
     CFG_ID_LIVE_QUATERNION_EN = 'q',
+	
 };
 // NOTE: update this value when changing the cfg_id
 #ifdef MV_ACC_GYRO_DMP_EN
-    #define CFG_ID_LIST_SIZE 8
+    #define CFG_ID_LIST_SIZE 9
 #else
-    #define CFG_ID_LIST_SIZE 7
+    #define CFG_ID_LIST_SIZE 8
 #endif
 
 struct cfg_default
@@ -224,7 +227,9 @@ enum sensor_type {
     SENS_MAG_RAW = 'm',
     /** raw altimeter (pressure) */
     SENS_ALT_RAW = 'p',
-    /** quaternion */
+    /*batt v*/
+	SENS_BATT_V = 'b',
+	/** quaternion */
     SENS_QUAT = 'q',
 };
 

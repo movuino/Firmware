@@ -15,6 +15,7 @@ const struct cfg_default cfg_id_list[CFG_ID_LIST_SIZE] = {
     {CFG_ID_LIVE_MAG_RAW_EN, CFG_LIVE_ENABLE},
     /** enable raw altimeter at live mode */
     {CFG_ID_LIVE_ALT_RAW_EN, CFG_LIVE_ENABLE},
+	{CFG_ID_LIVE_BATT_V_EN, CFG_LIVE_ENABLE},
 #ifdef MV_ACC_GYRO_DMP_EN
     /** enable quaternion at live mode */
     {CFG_ID_LIVE_QUATERNION_EN, CFG_LIVE_ENABLE},

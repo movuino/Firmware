@@ -187,7 +187,7 @@ static void rec_timeout(void)
         rec_timeout_ctx.accumulated += now - rec_timeout_ctx.last_check;
         rec_timeout_ctx.last_check = now;
 
-        if (rec_timeout_ctx.accumulated >= _REC_TIMEOUT)
+        if (rec_timeout_ctx.accumulated >= _REC_TIMEOUT || analogRead(A5)<600)
         {
             stop_rec();
             g_ctx.storage->sleep();
@@ -237,7 +237,12 @@ static void led_pattern(int pin, int logicOn, bool rec)
     static unsigned int ts = millis();
     static bool state = false;
     static bool first = true;
-
+	if(analogRead(A5)<600) 
+		{
+		digitalWrite(pin, HIGH);
+		//change to red pin
+		pin=10;
+		}
     // Turn off
     if (state)
     {
@@ -511,7 +516,13 @@ void MvCore::loop()
                 g_ctx.frame.answer.sub.sensor_data.data.single = MvSens::get_raw_alt();
                 send_live(&g_ctx.frame);
             }
-
+			// Send raw alt data
+            if(g_ctx.storage->get_cfg(CFG_ID_LIVE_BATT_V_EN))
+            {
+                g_ctx.frame.answer.sub.sensor_data.type = SENS_BATT_V;
+                g_ctx.frame.answer.sub.sensor_data.data.single = MvSens::get_batt_v();
+                send_live(&g_ctx.frame);
+            }
 #ifdef MV_ACC_GYRO_DMP_EN
             // Send quat data
             if(g_ctx.storage->get_cfg(CFG_ID_LIVE_QUATERNION_EN))

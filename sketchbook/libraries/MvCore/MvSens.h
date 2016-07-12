@@ -32,6 +32,8 @@ class MvSens {
         static struct sensor_3_axes get_raw_mag(void);
 
         static struct sensor_single get_raw_alt(void);
+		
+		 static struct sensor_single get_batt_v(void);
 
         static struct sensor_quaternion get_quat(void);
 
@@ -49,6 +51,7 @@ class MvSens {
         static sensor_3_axes gyro;
         static sensor_3_axes mag;
         static sensor_single alt;
+		static sensor_single batt;
 
         static void altimeter_setup(void);
 

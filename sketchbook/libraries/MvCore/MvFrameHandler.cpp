@@ -252,7 +252,13 @@ int MvFrameHandler::build_answer_frame_ascii_mode(char *buffer, struct answer *a
                             ans->sub.sensor_data.data.single.ts,
                             ans->sub.sensor_data.data.single.p);
                     goto ret;
-
+				case SENS_BATT_V:
+                    sprintf(buffer, FRAME_ASCII_PREFIX "%c %lu %d",
+                            ans->id,
+                            ans->sub.sensor_data.type,
+                            ans->sub.sensor_data.data.single.ts,
+                            ans->sub.sensor_data.data.single.p);
+                    goto ret;
                 case SENS_QUAT:
                     sprintf(buffer, FRAME_ASCII_PREFIX "SS: %c %.2f %.2f %.2f %.2f",
                             ans->id,
