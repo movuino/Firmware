@@ -14,7 +14,7 @@
 
 
 #define BUTTON_PIN 8
-#define WRITE_LED 12
+#define WRITE_LED 13
 #define VIBRATE_PIN 4
 
 MvCore g_core;

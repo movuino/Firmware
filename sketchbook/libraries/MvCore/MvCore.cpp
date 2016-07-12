@@ -243,7 +243,7 @@ static void led_pattern(int pin, int logicOn, bool rec)
     {
         if ((unsigned int)(millis() - ts) > 25)
         {
-            digitalWrite(pin, !logicOn);
+            digitalWrite(pin, logicOn);
             state = false;
             ts = millis();
         }
@@ -259,7 +259,7 @@ static void led_pattern(int pin, int logicOn, bool rec)
 
         if ((unsigned int)(millis() - ts) > per)
         {
-            digitalWrite(pin, logicOn);
+            digitalWrite(pin, !logicOn);
             state = true;
             ts = millis();
             if (first && rec)
