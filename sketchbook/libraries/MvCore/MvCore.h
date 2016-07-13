@@ -14,7 +14,7 @@
 class MvCore {
     public:
         void setup(MvStorage *storage, MvFrameHandler *fhandler,
-                   int sens_addr, int pin_button, int pin_vibrate);
+                   int sens_addr, int pin_button, int pin_vibrate,int pin_disable_ble, int pin_disable_flash);
         void setupLed(int pin, int logicOn);
         void loop();
 };

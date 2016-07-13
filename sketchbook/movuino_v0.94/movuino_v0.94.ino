@@ -12,10 +12,14 @@
 
 #include <SerialFlash.h>
 
-
+#define RED_LED 10
+#define BLUE_LED 13
+#define GREEN_LED 9
 #define BUTTON_PIN 8
 #define WRITE_LED 13
-#define VIBRATE_PIN 4
+#define VIBRATE_PIN A5 //not working for now
+#define BLE_DISABLE_PIN 4
+#define FLASH_DISABLE_PIN 12
 
 MvCore g_core;
 
@@ -35,8 +39,9 @@ void setup()
     Storage *storage = new Storage();
 
     /* Initialize the core app */
-    g_core.setup(storage, fhandler, MPU6050_ADDRESS_AD0_HIGH, BUTTON_PIN, VIBRATE_PIN);
-    g_core.setupLed(WRITE_LED, HIGH);
+    g_core.setup(storage, fhandler, MPU6050_ADDRESS_AD0_HIGH, BUTTON_PIN, VIBRATE_PIN,BLE_DISABLE_PIN,FLASH_DISABLE_PIN);
+    /*this function let configure logicON  : HIGH (normal) LOW (led pin sink current) */
+    g_core.setupLed(BLUE_LED, LOW);
 }
 
 void loop()

@@ -26,6 +26,8 @@ static struct
     bool recording;
     unsigned long vibrate_time_stamp;
     int sens_addr;
+	int pin_disable_ble;
+	int pin_disable_flash;
 } g_ctx;
 
 void MvCore::setupLed(int pin, int logicOn)
@@ -37,7 +39,7 @@ void MvCore::setupLed(int pin, int logicOn)
 
 
 void MvCore::setup(MvStorage *storage, MvFrameHandler *fhandler,
-                   int sens_addr, int pin_button, int pin_vibrate)
+                   int sens_addr, int pin_button, int pin_vibrate,int pin_disable_ble, int pin_disable_flash)
 {
     int i;
 
@@ -47,14 +49,18 @@ void MvCore::setup(MvStorage *storage, MvFrameHandler *fhandler,
     g_ctx.storage = storage;
     g_ctx.pin_button = pin_button;
     g_ctx.pin_vibrate = pin_vibrate;
+	g_ctx.pin_disable_ble=pin_disable_ble;
+	g_ctx.pin_disable_flash=pin_disable_flash;
     g_ctx.fhandler = fhandler;
     g_ctx.sens_addr = sens_addr;
     g_ctx.vibrate_time_stamp = 0;
-
+	
     if (g_ctx.pin_button > 0)
         pinMode(g_ctx.pin_button, INPUT_PULLUP);
-    pinMode(g_ctx.pin_vibrate, OUTPUT);
-
+    pinMode(pin_disable_ble, OUTPUT);
+	pinMode(pin_disable_flash, OUTPUT);
+	digitalWrite(pin_disable_ble,LOW);
+	digitalWrite(pin_disable_flash,LOW); //high : flash disabled
     /* Initialize the storage if it is not yet initialized */
     if(storage->status() < 0)
         storage->reset();
@@ -190,6 +196,8 @@ static void rec_timeout(void)
         if (rec_timeout_ctx.accumulated >= _REC_TIMEOUT || analogRead(A5)<600)
         {
             stop_rec();
+			/*hardcore stop*/
+			digitalWrite(g_ctx.pin_disable_flash,HIGH); 
             g_ctx.storage->sleep();
         }
     }
@@ -248,7 +256,7 @@ static void led_pattern(int pin, int logicOn, bool rec)
     {
         if ((unsigned int)(millis() - ts) > 25)
         {
-            digitalWrite(pin, logicOn);
+            digitalWrite(pin, !logicOn);
             state = false;
             ts = millis();
         }
@@ -264,7 +272,7 @@ static void led_pattern(int pin, int logicOn, bool rec)
 
         if ((unsigned int)(millis() - ts) > per)
         {
-            digitalWrite(pin, !logicOn);
+            digitalWrite(pin, logicOn);
             state = true;
             ts = millis();
             if (first && rec)
