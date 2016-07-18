@@ -316,6 +316,7 @@ int MvFrameHandler::ans_frame_size(struct answer *ans)
                     size += sizeof(ans->sub.sensor_data.data.raw);
                     break;
                 case SENS_ALT_RAW:
+				case SENS_BATT_V:
                     size += sizeof(ans->sub.sensor_data.data.single);
                     break;
                 case SENS_QUAT:

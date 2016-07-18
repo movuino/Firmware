@@ -204,9 +204,7 @@ int MvSens::read(void)
     // FIXME: this was done to avoid I2C blocage
 
     // Read from the altimeter
-    //MvSens::alt.p = MvSens::ms5611.readPressure();
-    /*temporary fix TO BE REMOVED !!!*/
-	MvSens::alt.p = analogRead(A5);
+    MvSens::alt.p = MvSens::ms5611.readPressure();
 	MvSens::alt.ts = millis();
 	 // Read from the altimeter
     MvSens::batt.p = analogRead(A5);
