@@ -56,8 +56,8 @@ void MvCore::setup(MvStorage *storage, MvFrameHandler *fhandler,
     pinMode(g_ctx.pin_vibrate, OUTPUT);
 
     /* Initialize the storage if it is not yet initialized */
-    if(storage->status() < 0)
-        storage->reset();
+    /*if(storage->status() < 0)
+        storage->reset();*/
 
     /* Set the stored configuration */
     g_ctx.live_ctl.period = 1000000/storage->get_cfg(CFG_ID_SAMPLING_RATE);
