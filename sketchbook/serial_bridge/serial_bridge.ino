@@ -1,6 +1,8 @@
 void
 setup(void)
 {
+  pinMode(4, OUTPUT);
+  digitalWrite(4, LOW);
   Serial.begin(38400);
   Serial1.begin(9600);
 }
@@ -8,6 +10,7 @@ setup(void)
 void
 loop(void)
 {
+  digitalWrite(4, LOW);
   char buffer;
   //if(Serial1.available()) Serial.println("BLE available");
   //if(Serial.available()) Serial.println("Serial available");
