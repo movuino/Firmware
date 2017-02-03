@@ -31,13 +31,13 @@ void loop() {
   int sensorValue = analogRead(A5);
   if(sensorValue<600){
      analogWrite(Led_Red_Pin, 0);
-     analogWrite(Led_Blue_Pin, 255); 
-     analogWrite(Led_Green_Pin, 255); 
+  //   analogWrite(Led_Blue_Pin, 255); 
+   //  analogWrite(Led_Green_Pin, 255); 
   }
   else {
     analogWrite(Led_Red_Pin, random(255));
-     analogWrite(Led_Blue_Pin, random(255)); 
-     analogWrite(Led_Green_Pin, random(255)); 
+   //  analogWrite(Led_Blue_Pin, random(255)); 
+   //  analogWrite(Led_Green_Pin, random(255)); 
   }
 /*  analogWrite(13, HIGH);   // turn the LED on (HIGH is the voltage level)
   digitalWrite(9, HIGH);   // turn the LED on (HIGH is the voltage level)
